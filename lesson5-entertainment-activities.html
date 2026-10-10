@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 5 – Places of Entertainment &amp; Future Arrangements</title>
+<style>
+:root{--navy:#1b1f4b;--ink:#232754;--yellow:#ffc93c;--coral:#ff5d73;--teal:#1fc8b4;--paper:#fff8ea;--green:#2fb36b;--red:#e5484d}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Trebuchet MS","Segoe UI",Tahoma,sans-serif;background:var(--navy);background-image:radial-gradient(#ffffff14 2px,transparent 2px);background-size:26px 26px;color:var(--ink);min-height:100vh;padding:14px}
+.wrap{max-width:960px;margin:0 auto}
+header{text-align:center;color:#fff;padding:18px 10px 22px}
+h1{font-size:2rem;color:var(--yellow);text-shadow:3px 3px 0 var(--coral);margin:4px 0}
+.by{display:inline-block;margin-top:8px;background:var(--yellow);color:var(--navy);font-weight:bold;padding:5px 16px;border-radius:20px;font-size:.9rem}
+#tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:10px 0 14px}
+.tab{background:var(--paper);border:3px dashed var(--yellow);border-radius:12px;padding:8px 4px;cursor:pointer;font:inherit;font-size:.9rem;font-weight:bold;color:var(--ink);transition:.2s}
+.tab:hover{transform:translateY(-3px)}
+.tab.on{background:var(--yellow);border-style:solid;border-color:#fff}
+.tab i{display:block;font-style:normal;font-size:1.3rem}
+.card{background:var(--paper);border-radius:18px;padding:18px;margin-bottom:14px;box-shadow:0 6px 0 #0006}
+.rule{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:.95rem}
+.rule div{border-radius:12px;padding:10px 12px;color:#fff}
+.rule .a{background:var(--teal)}.rule .b{background:var(--coral)}
+.rule b.f{background:#ffffff33;border-radius:6px;padding:2px 7px;display:inline-block;margin:3px 0}
+h2{color:var(--coral);margin-bottom:4px}
+.hint{color:#5d6192;margin-bottom:12px}
+.pool,.row{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:10px 0}
+.chip{background:#fff;border:3px solid var(--ink);border-radius:12px;padding:8px 12px;font-weight:bold;cursor:grab;user-select:none;box-shadow:0 3px 0 var(--ink);font-size:.95rem}
+.chip:hover{transform:translateY(-2px) rotate(-1deg)}
+.chip.sel{background:var(--yellow);transform:scale(1.06)}
+.chip.used{cursor:default;box-shadow:none;background:#d7f5e4;border-color:var(--green)}
+.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.spot{background:#fff;border:3px dashed var(--ink);border-radius:14px;padding:10px;text-align:center;min-height:150px}
+.spot .pic{font-size:2.4rem}
+.spot p{font-size:.88rem;color:#5d6192;margin:2px 0 6px}
+.slot{min-height:36px;border-bottom:3px dashed var(--coral);font-weight:bold;color:var(--green);padding-top:4px}
+.slot.ok{border-bottom-style:solid;border-color:var(--green)}
+.kid{background:#fff;border-radius:14px;padding:12px;margin-bottom:10px;border:2px solid #e8dfc8;display:grid;grid-template-columns:90px 1fr 1fr;gap:10px;align-items:center}
+.kid .pic{font-size:2.2rem;text-align:center}
+.kid .slot{background:#ffe3e755;border:3px dashed var(--coral);border-radius:10px;padding:6px;text-align:center;font-size:.9rem}
+.kid .slot.ok{background:#d7f5e4;border:3px solid var(--green)}
+.sent{background:#fff;border-radius:12px;padding:10px 14px;margin-bottom:10px;font-size:1.1rem;line-height:2.1;border:2px solid #e8dfc8}
+.sent input{font:inherit;width:150px;border:0;border-bottom:3px solid var(--coral);background:#fff3;text-align:center;color:var(--ink);padding:0 4px}
+.sent input.ok{border-color:var(--green);color:var(--green);background:#d7f5e4}
+.sent input.no{border-color:var(--red);color:var(--red)}
+.sent small{display:block;color:var(--green);font-size:.85rem;line-height:1.2}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:3px solid var(--ink);border-radius:12px;padding:11px 14px;margin-top:9px;font:inherit;font-weight:bold;cursor:pointer;color:var(--ink)}
+.opt:hover:not(:disabled){background:var(--yellow)}
+.opt.ok{background:#d7f5e4;border-color:var(--green)}.opt.no{background:#ffd9db;border-color:var(--red)}
+.bar{height:12px;background:#e8dfc8;border-radius:8px;overflow:hidden;margin-bottom:12px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--coral));transition:width .4s}
+.bigq{text-align:center;font-size:1.3rem;margin:6px 0}
+.msg{min-height:28px;text-align:center;font-weight:bold;margin:10px 0 4px}
+.msg.good{color:var(--green)}.msg.bad{color:var(--red)}
+.btn{background:var(--coral);color:#fff;border:0;border-radius:30px;padding:10px 24px;font:inherit;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #b83a4d;margin:6px}
+.btn.alt{background:var(--teal);box-shadow:0 4px 0 #14907f}
+.win{text-align:center}.win .big{font-size:3rem}
+/* exam paper */
+.paper{background:#fff;color:#111;border-radius:6px;padding:16px;font-family:Georgia,"Times New Roman",serif}
+.paper .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px}
+.paper .top b{font-family:Arial,sans-serif;font-size:1.15rem}
+.paper .top em{display:block;font-size:1rem}
+.paper .score{border:2px solid #111;min-width:60px;text-align:center;font-family:Arial,sans-serif}
+.paper .score span{display:block;border-bottom:2px solid #111;min-height:26px;font-weight:bold;padding-top:3px}
+.paper .passage{border:2px solid #111;padding:12px 14px;line-height:2.1;margin-bottom:14px}
+.ex{display:grid;grid-template-columns:36px repeat(3,1fr);align-items:center;padding:12px 0;border-bottom:1px dotted #bbb}
+.ex>b{font-family:Arial,sans-serif;font-size:1.1rem}
+.bub{display:flex;align-items:center;gap:8px;font-style:italic;font-size:1.05rem;cursor:pointer;padding:3px 6px;border-radius:8px}
+.bub input{appearance:none;-webkit-appearance:none;width:38px;height:20px;border:2px solid #111;border-radius:50%;flex:none;cursor:pointer;background:#fff}
+.bub input:checked{background:#111}
+.bub.ok{background:#d7f5e4;outline:2px solid var(--green)}.bub.no{background:#ffd9db;outline:2px solid var(--red)}
+footer{text-align:center;color:#fff;opacity:.85;padding:10px;font-size:.9rem}
+:focus-visible{outline:4px solid var(--yellow);outline-offset:2px}
+@media(max-width:700px){.grid{grid-template-columns:1fr 1fr}.rule{grid-template-columns:1fr}.kid{grid-template-columns:1fr}#tabs{grid-template-columns:repeat(3,1fr)}.ex{grid-template-columns:30px 1fr}.ex .bub{grid-column:2}h1{font-size:1.5rem}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div aria-hidden="true" style="font-size:1.8rem;letter-spacing:.4rem">🎳 🐠 🔭 🎢 🎪</div>
+  <h1>Places of Entertainment</h1>
+  <p>Lesson 5 · Present continuous for future arrangements</p>
+  <span class="by">Created by T.Badria Alfalahi</span>
+</header>
+<section class="card rule">
+  <div class="a"><b>Plans &amp; arrangements</b><br><b class="f">I'm / He's / She's / We're / They're + V-ing + future time</b><br>She's going to the aquarium next week.</div>
+  <div class="b"><b>Negative &amp; questions</b><br><b class="f">aren't / isn't + V-ing · Are you + V-ing?</b><br>We aren't going out. Are you having a special day out?</div>
+</section>
+<div id="tabs"></div>
+<main id="stage"></main>
+<footer>Created by T.Badria Alfalahi</footer>
+</div>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const T=[['🎟️','Match places'],['👧','Who is going where?'],['✏️','Complete'],['❓','Choose'],['📝','Exam paper']];
+const done=[0,0,0,0,0];let cur=0,sel=null;
+function tabs(){$('#tabs').innerHTML=T.map((t,i)=>`<button class="tab ${i==cur?'on':''}" onclick="go(${i})"><i>${done[i]?'✅':t[0]}</i>${t[1]}</button>`).join('')}
+function go(i){cur=i;tabs();[A,B,C,D,E][i]();window.scrollTo({top:0,behavior:'smooth'})}
+function finish(i,text){done[i]=1;tabs();const b=document.createElement('div');b.className='card win';b.innerHTML=`<div class="big">🎉</div><h2>${text}</h2>${i<4?`<button class="btn alt" onclick="go(${i+1})">Next activity ▶</button>`:''}<button class="btn" onclick="go(${i})">Play again ↻</button>`;$('#stage').appendChild(b);b.scrollIntoView({behavior:'smooth',block:'center'})}
+const say=(t,g)=>{const m=$('#msg');if(m){m.textContent=t;m.className='msg '+(g?'good':'bad')}};
+/* drag or tap-then-tap */
+document.addEventListener('dragstart',e=>{const c=e.target.closest&&e.target.closest('.chip');if(c&&!c.classList.contains('used')){sel=c;e.dataTransfer.setData('text/plain','x');c.classList.add('sel')}});
+document.addEventListener('dragover',e=>{if(e.target.closest&&e.target.closest('.zone'))e.preventDefault()});
+document.addEventListener('drop',e=>{const z=e.target.closest('.zone');if(z){e.preventDefault();drop(z)}});
+document.addEventListener('click',e=>{const c=e.target.closest('.chip'),z=e.target.closest('.zone');
+ if(c&&!c.classList.contains('used')){$$('.chip.sel').forEach(x=>x.classList.remove('sel'));sel=c;c.classList.add('sel')}else if(z&&sel)drop(z)});
+function drop(z){if(!sel||!z._h)return;const c=sel;sel=null;c.classList.remove('sel');if(z._h(c,z)===false){c.classList.remove('shake');void c.offsetWidth;c.classList.add('shake')}}
+function fill(c,z,txt){z.textContent=txt;z.classList.add('ok');c.classList.add('used');c.draggable=false}
+
+/* 1 – places (drag & drop) */
+const P=[['bowling alley','🎳','You roll a heavy ball to knock down pins.'],['aquarium','🐠','You can see fish, sharks and turtles.'],['soft play centre','🧸','Little children climb, slide and jump here.'],['science museum','🔬','You learn about science and experiments.'],['3D cinema','🎬','You wear special glasses to watch a film.'],['art gallery','🖼️','You can see paintings here.'],['ice rink','⛸️','You skate on ice here.'],['safari park','🦁','You can see lions and giraffes.'],['theme park','🎢','You ride roller coasters here.'],['circus','🎪','You can watch clowns and acrobats.'],['planetarium','🔭','You learn about the stars and planets.'],['adventure playground','🧗','You climb high and walk on bridges between the trees.']];
+function A(){let left=P.length,m=0;
+ $('#stage').innerHTML=`<section class="card"><h2>🎟️ Match the places</h2><p class="hint">Drag each place to the right clue. (Or tap a place, then tap the clue.)</p>
+ <div class="pool">${shuffle(P).map(p=>`<div class="chip" draggable="true" data-n="${p[0]}">${p[0]}</div>`).join('')}</div>
+ <div class="grid">${P.map(p=>`<div class="spot"><div class="pic">${p[1]}</div><p>${p[2]}</p><div class="slot zone" data-n="${p[0]}">?</div></div>`).join('')}</div><div class="msg" id="msg"></div></section>`;
+ $$('.slot').forEach(z=>z._h=(c,zone)=>{if(zone.classList.contains('ok'))return false;
+  if(c.dataset.n===zone.dataset.n){fill(c,zone,c.textContent);say('Yes! 👏',1);if(!--left)finish(0,m?`Well done! ${m} mistake${m>1?'s':''}.`:'Perfect! No mistakes!')}else{m++;say('Not that one. Read the clue again.',0);return false}})}
+
+/* 2 – who is going where (drag & drop, from the listening) */
+const K=[['👧','Girl 1','aquarium · next week','watching a film about life under the sea'],['👦','Boy 1','theme park · this month','riding roller coasters and having lunch'],['👦','Boy 2','adventure playground · tomorrow','climbing high and walking on bridges'],['👧','Girl 2','planetarium · next Monday','learning about the stars and planets']];
+function B(){let left=8,m=0;const ch=[];K.forEach((k,i)=>{ch.push([k[2],i,'w']);ch.push([k[3],i,'d'])});
+ $('#stage').innerHTML=`<section class="card"><h2>👧 Who is going where?</h2><p class="hint">Four children talk about their plans. Drag the <b>place and time</b> and the <b>plan</b> to each child.</p>
+ <div class="pool">${shuffle(ch).map(c=>`<div class="chip" draggable="true" data-k="${c[1]}" data-f="${c[2]}">${c[0]}</div>`).join('')}</div>
+ ${K.map((k,i)=>`<div class="kid"><div class="pic">${k[0]}<br><small>${k[1]}</small></div><div class="slot zone" data-k="${i}" data-f="w">Where &amp; when?</div><div class="slot zone" data-k="${i}" data-f="d">What are they doing?</div></div>`).join('')}
+ <div class="msg" id="msg"></div></section>`;
+ $$('.slot').forEach(z=>z._h=(c,zone)=>{if(zone.classList.contains('ok'))return false;
+  if(c.dataset.k===zone.dataset.k&&c.dataset.f===zone.dataset.f){fill(c,zone,c.textContent);say('Correct!',1);if(!--left)finish(1,m?`Great listening! ${m} mistake${m>1?'s':''}.`:'Perfect! No mistakes!')}else{m++;say('Check the listening again: who says this?',0);return false}})}
+
+/* 3 – complete the sentences (type) */
+const S=[['Next week, we','(go)','to the aquarium.','are going'],['She','(visit)','the art gallery on Saturday.','is visiting'],['I','(take)','my friends to the theme park tonight.','am taking'],['They','(not go)','to the circus tomorrow.',"aren't going"],['He','(meet)','his cousin at the ice rink this evening.','is meeting'],['','(you / come)','to the planetarium with us next Monday?','are you coming'],['My sister','(play)','at the soft play centre tomorrow.','is playing'],['We','(not stay)','at home this weekend.',"aren't staying"]];
+const norm=s=>s.toLowerCase().replace(/[’`]/g,"'").trim().replace(/\s+/g,' ').replace(/^'m /,'am ').replace(/^'re /,'are ').replace(/^'s /,'is ').replace('are not',"aren't").replace('is not',"isn't");
+function C(){
+ $('#stage').innerHTML=`<section class="card"><h2>✏️ Complete the sentences</h2><p class="hint">Write the verb in the Present continuous. You can use short forms like 're or 'm.</p>
+ ${S.map((s,i)=>`<div class="sent">${s[0]} <input id="c${i}" autocomplete="off" autocapitalize="off" spellcheck="false"> <b>${s[1]}</b> ${s[2]}</div>`).join('')}
+ <div style="text-align:center"><button class="btn" id="chk">Check answers</button></div><div class="msg" id="msg"></div></section>`;
+ $('#chk').onclick=()=>{let n=0;S.forEach((s,i)=>{const e=$('#c'+i),ok=norm(e.value)===s[3];e.className=ok?'ok':'no';e.parentNode.querySelectorAll('small').forEach(x=>x.remove());if(ok)n++;else e.parentNode.insertAdjacentHTML('beforeend',`<small>✔ ${s[3]}</small>`)});
+  say(`Score: ${n} / ${S.length}`,n===S.length);if(n===S.length&&!done[2])finish(2,'Excellent! All correct!')}}
+
+/* 4 – multiple choice */
+const Q=[['She ___ to an aquarium next week.',['is going','are going','going'],0,"She → is + going."],['They ___ to Cairo next week.',['is flying','are flying','flies'],1,'They → are + flying.'],['We use the Present continuous for plans that we have ___ or arranged.',['decided','forgotten','finished'],0,'We use it for things we have decided or arranged.'],['Where can you see paintings?',['ice rink','circus','art gallery'],2,'Paintings are in an art gallery.'],['Which place is for learning about the stars?',['aquarium','planetarium','safari park'],1,'The planetarium.'],['I ___ my friend this afternoon.',['am meeting','meet','met'],0,'A plan for this afternoon → am meeting.'],['Which sentence is a plan for the future?',["Look! I'm riding a roller coaster.","He is sleeping now.","I'm taking five friends to a theme park this month."],2,'"This month" shows a future arrangement.'],['___ you having a special day out?',['Is','Are','Do'],1,'You → Are you having…?']];
+function D(){let i=0,s=0;const show=()=>{
+ if(i>=Q.length){$('#stage').innerHTML=`<section class="card win"><div class="big">🏆</div><h2>You scored ${s} / ${Q.length}</h2><button class="btn" onclick="go(3)">Play again ↻</button><button class="btn alt" onclick="go(4)">Next activity ▶</button></section>`;done[3]=1;tabs();return}
+ const q=Q[i];$('#stage').innerHTML=`<section class="card"><h2>❓ Choose the correct answer</h2><div class="bar"><i style="width:${i/Q.length*100}%"></i></div><div class="bigq">${q[0]}</div>
+ ${shuffle(q[1].map((t,k)=>[t,k===q[2]])).map(o=>`<button class="opt" data-ok="${o[1]?1:0}">${o[0]}</button>`).join('')}<div class="msg" id="msg"></div><div style="text-align:center" id="nx"></div></section>`;
+ $$('.opt').forEach(b=>b.onclick=()=>{const g=b.dataset.ok==='1';$$('.opt').forEach(x=>{x.disabled=true;if(x.dataset.ok==='1')x.classList.add('ok')});if(g)s++;else b.classList.add('no');say((g?'Correct! ':'Not this time. ')+q[3],g);
+  $('#nx').innerHTML=`<button class="btn alt" id="go">${i==Q.length-1?'See my score 🏆':'Next ▶'}</button>`;$('#go').onclick=()=>{i++;show()}})};show()}
+
+/* 5 – exam paper (shade the bubble) */
+const X=[['are visiting','is visiting','visit'],['watching','watch','watched'],['is taking','are taking','take'],['am going','is going','go'],['theme park','planetarium','art gallery'],['safari park','ice rink','aquarium'],['circus','library','planetarium'],['is playing','are playing','play'],['aren\'t','isn\'t','don\'t'],['playground','museum','cinema']];
+const b=n=>`(${n})____`;
+function E(){const o=X.map(a=>shuffle(a.map((t,k)=>[t,k===0])));
+ $('#stage').innerHTML=`<section class="card"><div class="paper"><div class="top"><div><b>GRAMMAR/VOCABULARY 05 (1 - 10)</b><em>For each item, shade in the bubble next to the correct option.</em></div><div class="score"><span id="sc"></span><div>10</div></div></div>
+ <div class="passage">Next week is the school holiday, and my family has lots of plans. On Sunday, we ${b(1)} the aquarium to see sharks and turtles. Then we are ${b(2)} a film in the 3D cinema next to it. On Monday, my brother ${b(3)} his friends to the ice rink because he loves skating. On Tuesday, I ${b(4)} to the science museum with my class. We are learning about robots there. On Wednesday, my cousins are visiting the ${b(5)} because they want to ride the fast roller coasters. On Thursday, my parents are going to the ${b(6)} to see lions and giraffes. On Friday evening, we are watching clowns and acrobats at the ${b(7)}. My little sister ${b(8)} at the soft play centre on Saturday morning. She loves climbing and sliding. On Saturday afternoon, we ${b(9)} going out because we are tired. Dad is taking us to the adventure ${b(10)} on Sunday instead, and we can't wait!</div>
+ ${o.map((a,i)=>`<div class="ex"><b>${i+1}.</b>${a.map(t=>`<label class="bub" data-ok="${t[1]?1:0}"><input type="radio" name="x${i}">${t[0]}</label>`).join('')}</div>`).join('')}
+ </div><div style="text-align:center;margin-top:12px"><button class="btn" id="chk">Check answers</button><button class="btn alt" onclick="go(4)">Try again ↻</button></div><div class="msg" id="msg"></div></section>`;
+ $('#chk').onclick=()=>{let n=0;$$('.ex').forEach(r=>{const bs=[...r.querySelectorAll('.bub')];bs.forEach(l=>l.classList.remove('ok','no'));const ch=bs.find(l=>l.querySelector('input').checked);
+   bs.forEach(l=>{if(l.dataset.ok==='1')l.classList.add('ok')});if(ch&&ch.dataset.ok==='1')n++;else if(ch)ch.classList.add('no')});
+  $('#sc').textContent=n;say(`Score: ${n} / 10`,n===10);if(!done[4]){done[4]=1;tabs()}}}
+go(0);
+</script>
+</body>
+</html>
